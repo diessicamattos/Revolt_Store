@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revolt Store</title>
+<style>
+
+  @font-face {
+    font-family: android;
+    src: url(../fontes/idroid.otf) format(opentype);
+
+}
+  /* Reset e base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+  }
+
+  /* Cabeçalho com logo em destaque */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    background-color: #000;
+    border-bottom: 2px solid #ff6600;
+  }
+
+  header img {
+    height: 70px;
+    transition: transform 0.3s ease;
+  }
+
+  h1{
+    font-family: android;
+    font-size: 50px;
+  }
+
+  header img:hover {
+    transform: scale(1.05);
+    border:2px solid #ff6600; ;
+  }
+
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+  }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: -5px;
+    background: #ff6600;
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Lista de produtos */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .product {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .product:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px #ff6600aa;
+  }
+
+  .product img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .product h3 {
+    margin-bottom: 0.5rem;
+    color: #ff6600;
+  }
+
+  /* Carrinho moderno */
+  .cart {
+    background: linear-gradient(to right, #1f1f1f, #151515);
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem;
+    box-shadow: 0 0 15px #ff660066;
+  }
+
+  .cart h2 {
+    color: #ff6600;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+  }
+
+  input, select, button {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+
+  input:focus, select:focus, button:hover {
+    background-color: #ff6600;
+    color: #000;
+  }
+
+  button {
+    background-color: #ff6600;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* Responsivo */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    nav {
+      flex-direction: column;
+    }
+
+    .cart {
+      margin: 1rem;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <header>
+    <img id="logo-img" src="IMAGENS/logo revolt store.jpg" alt="Logo Revolt Store" />
+    <h1>REVOLT STORE</h1>
+    <nav>
+      <a href="#cart">Carrinho</a>
+      <a href="https://wa.me/555196783734" target="_blank">WhatsApp</a>
+    </nav>
+  </header>
+
+  <section class="products">
+    <div class="product">
+      <img src="IMAGENS/Moleton Adidias_R$220.jpg" alt="Moleton Adidas" />
+      <h3>Moleton Adidas - R$220</h3>
+      <button onclick="addToCart('Moleton Adidas', 220)">Adicionar ao carrinho</button>
+    </div>
+    <div class="product">
+      <img src="IMAGENS/Moleton High_R$200 frente.jpg" alt="Moleton High" />
+      <h3>Moleton High - R$200</h3>
+      <button onclick="addToCart('Moleton High', 200)">Adicionar ao carrinho</button>
+    </div>
+  
+    <div class="product">
+      <img src="IMAGENS/Moleton Puma _R$200 frente.jpg" alt="Moleton Puma" />
+      <h3>Moleton Puma - R$200</h3>
+      <button onclick="addToCart('Moleton Puma', 200)">Adicionar ao carrinho</button>
+    </div>
+  </section>
+
+  <section id="cart" class="cart">
+    <h2>Carrinho</h2>
+    <ul id="cart-items"></ul>
+
+    <h3>Total: R$ <span id="total">0</span></h3>
+
+    <h3>Informações do Cliente</h3>
+    <input type="text" placeholder="Nome" id="name" />
+    <input type="text" placeholder="Telefone" id="phone" />
+    <input type="text" placeholder="Endereço" id="address" />
+
+    <label>Forma de pagamento:
+      <select id="payment">
+        <option>PIX</option>
+        <option>Cartão</option>
+        <option>Dinheiro</option>
+      </select>
+    </label>
+
+    <label>Deseja entrega?
+      <select id="delivery">
+        <option>Sim</option>
+        <option>Não</option>
+      </select>
+    </label>
+
+    <button onclick="checkout()">Finalizar pedido</button>
+  </section>
+
+<script>
+  const cart = {};
+
+  function addToCart(product, price) {
+    if (cart[product]) {
+      cart[product].qty++;
+    } else {
+      cart[product] = { price, qty: 1 };
+    }
+    renderCart();
+  }
+
+  function renderCart() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    for (const product in cart) {
+      const item = cart[product];
+      total += item.price * item.qty;
+      cartItems.innerHTML += `
+        <li>
+          ${product} - R$${item.price} x 
+          <input type="number" min="1" value="${item.qty}" onchange="updateQty('${product}', this.value)" />
+          <button onclick="removeFromCart('${product}')">Remover</button>
+        </li>
+      `;
+    }
+    document.getElementById('total').innerText = total;
+  }
+
+  function updateQty(product, qty) {
+    cart[product].qty = parseInt(qty);
+    renderCart();
+  }
+
+  function removeFromCart(product) {
+    delete cart[product];
+    renderCart();
+  }
+
+  function checkout() {
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
+    const payment = document.getElementById('payment').value;
+    const delivery = document.getElementById('delivery').value;
+
+    let message = `*Novo Pedido - Revolt Store*%0A`;
+    message += `🧍 Cliente: ${name}%0A📞 Telefone: ${phone}%0A🏠 Endereço: ${address}%0A`;
+    message += `💳 Pagamento: ${payment}%0A🚚 Entrega: ${delivery}%0A%0A`;
+    message += `🛍️ *Itens do Pedido:*%0A`;
+
+    let total = 0;
+    for (const product in cart) {
+      const item = cart[product];
+      total += item.price * item.qty;
+      message += `- ${product} (x${item.qty}) - R$${item.price * item.qty}%0A`;
+    }
+
+    message += `%0A💰 *Total:* R$${total}`;
+
+    alert(`Pedido enviado!\n\nItens:\n${decodeURIComponent(message.replace(/%0A/g, '\n'))}`);
+
+    // Redireciona para o WhatsApp com a mensagem (número da loja)
+    const phoneNumber = '555196783734'; // WhatsApp da loja
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  }
+</script>
+
+</body>
+</html>
+
