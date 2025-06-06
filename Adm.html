@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Administrativo - Revolt Store</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #000;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #ff6600;
+    }
+
+    header h1 {
+      color: #ff6600;
+      font-size: 32px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 2rem;
+    }
+
+    h2 {
+      color: #ff6600;
+    }
+
+    .card {
+      background-color: #1a1a1a;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+
+    input, select, button, textarea {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.7rem;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 1rem;
+      background-color: #2a2a2a;
+      color: white;
+    }
+
+    button {
+      background-color: #ff6600;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ffaa00;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Admin - Revolt Store</h1>
+    <nav>
+      <a href="#produtos">Produtos</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#pedidos">Pedidos</a>
+      <a href="#relatorios">Relatórios</a>
+    </nav>
+  </header>
+
+  <section id="produtos">
+    <h2>🛍️ Gestão de Produtos</h2>
+    <div class="card">
+      <input type="text" placeholder="Nome do Produto">
+      <input type="text" placeholder="Marca">
+      <input type="number" placeholder="Preço">
+      <input type="number" placeholder="Estoque">
+      <textarea placeholder="Descrição detalhada"></textarea>
+      <input type="text" placeholder="Categoria">
+      <input type="file" multiple>
+      <select>
+        <option>Cor</option>
+        <option>Tamanho</option>
+      </select>
+      <button>Cadastrar Produto</button>
+    </div>
+  </section>
+
+  <section id="clientes">
+    <h2>👥 Gestão de Clientes</h2>
+    <div class="grid">
+      <div class="card">
+        <p><strong>Nome:</strong> João Silva</p>
+        <p><strong>Pedidos:</strong> 4</p>
+        <p><strong>Status:</strong> Ativo</p>
+        <button>Ver Histórico</button>
+      </div>
+      <!-- Repetir para mais clientes -->
+    </div>
+  </section>
+
+  <section id="pedidos">
+    <h2>🧾 Gestão de Pedidos</h2>
+    <div class="card">
+      <p><strong>Pedido #12345</strong> - João Silva</p>
+      <p>Status: <select>
+        <option>Em processamento</option>
+        <option>Enviado</option>
+        <option>Entregue</option>
+        <option>Cancelado</option>
+      </select></p>
+      <button>Atualizar Status</button>
+    </div>
+  </section>
+
+  <section id="relatorios">
+    <h2>📊 Relatórios e Indicadores</h2>
+    <div class="card">
+      <p>📈 Vendas do mês: <strong>R$ 5.400,00</strong></p>
+      <p>🔝 Produto mais vendido: <strong>Moleton Adidas</strong></p>
+      <p>🧍 Clientes ativos: <strong>18</strong></p>
+    </div>
+  </section>
+
+  <script>
+    // Aqui vão interações futuras com Firebase, API REST ou LocalStorage
+    // Exemplo: função de cadastro, listagem, filtros etc.
+  </script>
+</body>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="admin.js"></script>
+
+</html>
